@@ -1,0 +1,35 @@
+class Solution:
+    def addStrings(self, num1: str, num2: str) -> str:
+        # Step 1: Create two pointers that start at the last digit (right side) of each string
+        i = len(num1) - 1
+        j = len(num2) - 1
+
+        # carry is the "extra" number we pass to the next column when digits add up to 10 or more
+        carry = 0
+
+        # res will hold the answer, but backwards (we add from right to left)
+        res = [] 
+
+        # Step 2: Keep looping while there are still digits left in num1, num2, or carry
+        while i >= 0 or j >= 0 or carry:
+            # if i or j are valid positions, grab that digit
+            # otherwise, if the number ran out of digits, just use 0
+            x1 = int(num1[i]) if i >= 0 else 0
+            x2 = int(num2[j]) if j >= 0 else 0
+
+            # add the two digits plus carry
+            total = x1 + x2 + carry
+
+            # update carry (if total is 15, carry becomes 1 for the next round)
+            carry = total // 10
+
+            # take only the last digit of total (like 15 -> 5)
+            res.append(str(total % 10))
+
+            # move both pointers to the left (next digit)
+            i -= 1
+            j -= 1
+
+        # Step 3: res is backwards (we added from right to left),
+        # so reverse it and join into a string
+        return ''.join(res[::-1])

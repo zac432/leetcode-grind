@@ -1,0 +1,58 @@
+📄 Solution Explanation: 1221. Split a String in Balanced Strings
+Problem Restatement
+
+We are given a balanced string s that contains only the characters 'L' and 'R'.
+A balanced string is one where the number of 'L' characters equals the number of 'R' characters.
+
+We need to split the string into the maximum number of balanced substrings.
+
+# Approach
+
+- Balance Counter
+- Use a single integer balance to track the difference between R and L.
+- Add +1 when we see 'R'.
+- Subtract -1 when we see 'L'.
+- Count Balanced Substrings
+- Each time balance == 0, it means we’ve found a balanced substring.
+- Increase our count by 1.
+- Iterate Through String
+- Traverse the string once, update the balance, and count whenever balance resets to 0.
+- Return the count
+- At the end, count represents the maximum number of balanced substrings.
+- its like if R is + 4 and L -4 this will result in a 0 which is balance 
+Example Walkthrough
+Example 1
+
+s = "RLRRLLRLRL"
+R → balance = +1
+L → balance = 0 → ✅ count = 1
+RR L L → balance back to 0 → ✅ count = 2
+R L → balance = 0 → ✅ count = 3
+R L → balance = 0 → ✅ count = 4
+
+
+Answer: 4
+Complexity
+Time Complexity: O(n) — we go through the string once.
+Space Complexity: O(1) — only two variables (balance and count).
+
+
+class Solution:
+    def balancedStringSplit(self, s: str) -> int:
+        # We will use a counter 'balance' to track difference between R (+1) and L (-1).
+        # Also keep a result counter 'res' for number of balanced substrings.
+        balance = 0
+        res = 0  
+
+        for char in s:
+            # If we see an 'R', increase balance; if 'L', decrease balance
+            if char == 'R':
+                balance += 1
+            else:
+                balance -= 1  
+
+            # Whenever balance becomes 0, it means we found a balanced substring
+            if balance == 0:
+                res += 1  
+
+        return res

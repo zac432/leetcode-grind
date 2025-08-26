@@ -8,5 +8,4 @@ linked lists:
 For Python lists → you can use both for and while.
 For Linked Lists → normally use while, because you must “walk” node by node with .next.
 
-
-
+then we  
